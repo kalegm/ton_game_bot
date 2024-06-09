@@ -1,0 +1,39 @@
+[client]
+ua = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36 Edg/124.0.0.0"
+
+[game]
+[game.hamster]
+enabled = true
+token = ""
+capacity = 5000
+recovery_seconds = 3
+click_one = 7
+click_interval = [30, 70]
+sleep_interval = [7, 10]
+
+[game.yes_coin]
+enabled = true # token 有效期 30 天
+token = ""
+capacity = 6500
+recovery_seconds = 12
+click_one = 6
+click_interval = [80, 120]
+sleep_interval = [7, 9]
+
+[game.memefi]
+enabled = true # token 有效期 7 天
+token = ""
+capacity = 3000
+recovery_seconds = 4
+click_one = 2
+click_interval = [40, 70]
+sleep_interval = [7, 12]
+
+[game.tap_swap]
+enabled = true # token 有效期 1 小时
+token = ""
+capacity = 2500
+recovery_seconds = 3
+click_one = 4
+click_interval = [30, 50]
+sleep_interval = [7, 10]
