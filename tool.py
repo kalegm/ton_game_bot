@@ -70,3 +70,6 @@ class JobInfo:
     @property
     def recovery_seconds(self):
         return self._data.get("recovery_seconds")
+
+    def get(self, key, default=None):
+        return self._data.get(key, default)

@@ -1,8 +1,9 @@
 import sys
 import threading
 from loguru import logger
-from game import YesCoin, Hamster, MeMeFi, TapSwap, one_tap_swap
+from game import YesCoin, Hamster, MeMeFi, TapSwap, PixelTap, one_tap_swap, one_meme_fi
 from tool import load_config, JobInfo
+import argparse
 
 logger.remove()
 logger.add(
@@ -15,6 +16,7 @@ job_func_map = {
     "yes_coin": YesCoin,
     "memefi": MeMeFi,
     "tap_swap": TapSwap,
+    "pixel_tap": PixelTap,
 }
 
 
@@ -60,9 +62,8 @@ class Scheduler:
             thread.join()
 
 
-def main():
-
-    config = load_config("config.toml")
+def main(config_file):
+    config = load_config(config_file)
     scheduler = Scheduler(config)
     try:
         scheduler.run()
@@ -73,4 +74,15 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    parser = argparse.ArgumentParser(description="Specify the configuration file.")
+    parser.add_argument(
+        "--config",
+        type=str,
+        default="config.toml",
+        help="Path to the configuration file",
+    )
+    args = parser.parse_args()
+    logger.info(f"使用配置文件 config file: {args.config}")
+    main(args.config)
+    # one_tap_swap()
+    # one_meme_fi()

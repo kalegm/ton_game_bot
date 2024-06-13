@@ -14,6 +14,7 @@
 
 1. 需要配合依赖抓包工具，获取当前登录的 `cookie` 认证信息。
 2. 抓包工具 `Charles`、`Fiddler`、`Wireshark` 等，获取请求 `headers` 中的 `Authorization` 信息。
+3. 支持 `Telegram` 网页端玩的游戏，可以在浏览器中查看请求 `headers` 中的 `Authorization` 信息。
 
 ## 本地使用
 
@@ -54,9 +55,9 @@ sleep_interval = [7, 10] # 每次请求间隔时间
 * [YesCoin](https://t.me/theYescoin_bot/Yescoin?startapp=nVhaIO)
 * [Hamster Kombat](https://t.me/hamsteR_kombat_bot/start?startapp=kentId6848345749)
 * [MemeFi](https://t.me/memefi_coin_bot?start=r_9a7a1353be)
-* [TapSwap](https://t.me/tapswap_bot?start=r_6848345749)
     - [x] 支持击杀 `Boos` 自动升级跳入下一关
-    - [ ] 每日任务
+    - [x] 支持定时挂机收益
+* [TapSwap](https://t.me/tapswap_bot?start=r_6848345749)
 
 欢迎沟通新的游戏项目，会尽快支持，加入群聊 [telegram](https://t.me/ton_game_coin)。
 
