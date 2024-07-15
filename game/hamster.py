@@ -26,8 +26,8 @@ class Hamster:
 
     def __init__(self, job_info: JobInfo):
         self.config = job_info
-        self.sync_url = "https://api.hamsterkombat.io/clicker/sync"
-        self.click_url = "https://api.hamsterkombat.io/clicker/tap"
+        self.sync_url = "https://api.hamsterkombatgame.io/clicker/sync"
+        self.click_url = "https://api.hamsterkombatgame.io/clicker/tap"
         self.available_taps = 0
         self.last_sync_update = 0
         self.boost_earn_per_tap = 0
