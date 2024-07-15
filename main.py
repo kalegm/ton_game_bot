@@ -1,7 +1,16 @@
 import sys
 import threading
 from loguru import logger
-from game import YesCoin, Hamster, MeMeFi, TapSwap, PixelTap, one_tap_swap, one_meme_fi
+from game import (
+    YesCoin,
+    Hamster,
+    MeMeFi,
+    TapSwap,
+    PixelTap,
+    TapCat,
+    one_tap_swap,
+    one_meme_fi,
+)
 from tool import load_config, JobInfo
 import argparse
 
@@ -17,6 +26,7 @@ job_func_map = {
     "memefi": MeMeFi,
     "tap_swap": TapSwap,
     "pixel_tap": PixelTap,
+    "tap_cat": TapCat,
 }
 
 
