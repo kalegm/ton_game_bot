@@ -1,18 +1,21 @@
+import argparse
 import sys
 import threading
+
 from loguru import logger
+
 from game import (
-    YesCoin,
     Hamster,
     MeMeFi,
-    TapSwap,
     PixelTap,
     TapCat,
-    one_tap_swap,
+    TapSwap,
+    YesCoin,
+    Blum,
     one_meme_fi,
+    one_tap_swap,
 )
-from tool import load_config, JobInfo
-import argparse
+from tool import JobInfo, load_config
 
 logger.remove()
 logger.add(
@@ -27,6 +30,7 @@ job_func_map = {
     "tap_swap": TapSwap,
     "pixel_tap": PixelTap,
     "tap_cat": TapCat,
+    "blum": Blum,
 }
 
 

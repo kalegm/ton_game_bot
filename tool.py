@@ -1,7 +1,9 @@
+import base64
+import json
+import os
+
 import arrow
 import toml
-import os
-import base64, json
 
 
 def load_config(config_file):

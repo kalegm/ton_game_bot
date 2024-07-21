@@ -1,4 +1,5 @@
 import random
+import json
 import time
 import httpx
 from tool import JobInfo
@@ -29,7 +30,9 @@ class TapCat:
         self.client = httpx.Client(verify=False)
         self.mining_url = "https://cat-backend.pro/v1/points/mining"
         self.profile_url = "https://cat-backend.pro/v1/auth/profile"
+        self.mines_start_url = "https://cat-backend.pro/v1/games/mines-start"
         self.headers = self.update_headers()
+        self.playing_count = 0
 
     def update_headers(self):
         headers["Authorization"] = self.config.token
@@ -49,6 +52,35 @@ class TapCat:
                         return
             except Exception as e:
                 time.sleep(1)
+
+    def mines_start(self):
+        for _ in range(3):
+            try:
+                response = self.client.get(
+                    url=self.mines_start_url, headers=self.headers
+                )
+                if response.status_code == 200:
+                    logger.info(f"游戏开始: {response.text}")
+                    return
+            except Exception as e:
+                time.sleep(2)
+
+    def mines_end(self):
+        for _ in range(3):
+            try:
+                amount = random.randint(5, 8)
+                response = self.client.post(
+                    url=self.mines_start_url,
+                    headers=self.headers,
+                    data=json.dumps(
+                        {"right_answers_amount": amount, "is_bombed": False}
+                    ),
+                )
+                if response.status_code == 200:
+                    logger.info(f"游戏获取: {response.text}")
+                    return
+            except Exception as e:
+                time.sleep(2)
 
     def end_mining(self):
         for _ in range(3):
@@ -73,17 +105,32 @@ class TapCat:
         if response.status_code == 200:
             total_points = response.json().get("total_points")
             logger.info(f"当前额度 {total_points}")
+            self.playing_count = response.json().get(
+                "playing_tickets_amount"
+            )  # 游戏剩余次数
         else:
             logger.info("获取额度失败")
 
     def run(self):
         try:
+            self.get_profile()
             self.start_mining()
             sleep_time = random.randint(*self.config.sleep_interval)
             logger.info(f"mining 开始，等待 {sleep_time} 秒")
+            if self.playing_count != 0:
+                n = random.randint(5, 10)
+                if n > self.playing_count:
+                    n = self.playing_count
+                logger.info(f"本次游玩 {n} 次")
+                for _ in range(n):
+                    self.mines_start()
+                    n = random.randint(5, 8)
+                    logger.info(f"游戏进行中，等待 {n} 秒")
+                    time.sleep(n)
+                    self.mines_end()
+                    time.sleep(random.randint(3, 5))
             time.sleep(sleep_time)
             self.end_mining()
-            self.get_profile()
         except Exception as e:
             logger.error(f"An error occurred: {str(e)}")
             time.sleep(10 * 60)
